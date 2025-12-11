@@ -31,9 +31,9 @@ import {
 } from '@kit/ui/select';
 import { Trans } from '@kit/ui/trans';
 import { toast } from 'sonner';
-import { CreateTaskSchema, UpdateTaskSchema, type CreateTaskFormData } from '../schema';
+import { CreateTaskSchema, UpdateTaskSchema} from '../schema';
 import { useCreateTask, useUpdateTask } from '../hooks/use-tasks';
-import { Task, TASK_PRIORITY_OPTIONS, TASK_STATUS_OPTIONS, TaskPriority, TaskStatus } from '../types';
+import { Task, TASK_PRIORITY_OPTIONS, TASK_STATUS_OPTIONS } from '../types';
 
 interface TaskFormProps {
   open: boolean;
