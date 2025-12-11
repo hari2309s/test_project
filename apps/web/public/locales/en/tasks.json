@@ -1,0 +1,73 @@
+{
+  "title": "Tasks",
+  "description": "Manage your tasks and stay organized",
+  "newTask": "New Task",
+  "createTask": "Create Task",
+  "editTask": "Edit Task",
+  "deleteTask": "Delete Task",
+  "confirmDelete": "Are you sure you want to delete this task?",
+  "confirmDeleteDescription": "This action cannot be undone.",
+  
+  "fields": {
+    "title": "Title",
+    "titlePlaceholder": "Enter task title...",
+    "description": "Description",
+    "descriptionPlaceholder": "Add more details about this task...",
+    "priority": "Priority",
+    "status": "Status",
+    "dueDate": "Due Date"
+  },
+  
+  "status": {
+    "all": "All Status",
+    "pending": "Pending",
+    "inProgress": "In Progress",
+    "completed": "Completed"
+  },
+  
+  "priority": {
+    "all": "All Priorities",
+    "low": "Low",
+    "medium": "Medium",
+    "high": "High",
+    "urgent": "Urgent"
+  },
+  
+  "actions": {
+    "create": "Create",
+    "update": "Update",
+    "delete": "Delete",
+    "cancel": "Cancel",
+    "save": "Save",
+    "edit": "Edit",
+    "complete": "Mark as Complete",
+    "uncomplete": "Mark as Pending",
+    "search": "Search tasks..."
+  },
+  
+  "stats": {
+    "total": "Total Tasks",
+    "pending": "Pending",
+    "completed": "Completed"
+  },
+  
+  "messages": {
+    "createSuccess": "Task created successfully",
+    "createError": "Failed to create task",
+    "updateSuccess": "Task updated successfully",
+    "updateError": "Failed to update task",
+    "deleteSuccess": "Task deleted",
+    "deleteError": "Failed to delete task",
+    "loadError": "Failed to load tasks. Please try again later.",
+    "noTasks": "No tasks found. Create your first task to get started!",
+    "completeSuccess": "Task completed!",
+    "uncompleteSuccess": "Task marked as pending",
+    "statusUpdateError": "Failed to update task status"
+  },
+  
+  "validation": {
+    "titleRequired": "Title is required",
+    "titleTooLong": "Title is too long",
+    "descriptionTooLong": "Description is too long"
+  }
+}
