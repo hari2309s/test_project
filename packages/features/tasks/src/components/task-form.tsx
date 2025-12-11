@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect } from 'react';
-import { useForm } from 'react-hook-form';
+import { useForm, type FieldValues } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Button } from '@kit/ui/button';
 import {
@@ -41,19 +41,32 @@ interface TaskFormProps {
   task?: Task | null;
 }
 
+type TaskFormValues = {
+  title: string;
+  description?: string | null;
+  priority: 'low' | 'medium' | 'high' | 'urgent';
+  status?: 'pending' | 'in_progress' | 'completed';
+  dueDate?: Date | null;
+};
+
 export function TaskForm({ open, onOpenChange, task }: TaskFormProps) {
   const isEditing = !!task;
   const createTask = useCreateTask();
   const updateTask = useUpdateTask();
 
-  const form = useForm<CreateTaskFormData & { status?: TaskStatus }>({
-    resolver: zodResolver(isEditing ? UpdateTaskSchema : CreateTaskSchema),
+  // Create a custom resolver that handles both schemas
+  const resolver: any = isEditing 
+    ? zodResolver(UpdateTaskSchema) 
+    : zodResolver(CreateTaskSchema);
+
+  const form = useForm<TaskFormValues>({
+    resolver,
     defaultValues: {
       title: '',
       description: '',
       priority: 'medium',
-      dueDate: null,
       status: 'pending',
+      dueDate: null,
     },
   });
 
@@ -61,11 +74,11 @@ export function TaskForm({ open, onOpenChange, task }: TaskFormProps) {
     if (task) {
       form.reset({
         title: task.title,
-        description: task.description || '',
-        priority: task.priority as TaskPriority,
-        status: task.status as TaskStatus,
+        description: task.description,
+        priority: task.priority,
+        status: task.status,
         dueDate: task.due_date ? new Date(task.due_date) : null,
-      });
+      } as TaskFormValues);
     } else {
       form.reset({
         title: '',
@@ -77,7 +90,7 @@ export function TaskForm({ open, onOpenChange, task }: TaskFormProps) {
     }
   }, [task, form, open]);
 
-  const onSubmit = async (data: CreateTaskFormData & { status?: TaskStatus }) => {
+  const onSubmit = async (data: TaskFormValues): Promise<void> => {
     try {
       if (isEditing) {
         await updateTask.mutateAsync({
@@ -155,7 +168,11 @@ export function TaskForm({ open, onOpenChange, task }: TaskFormProps) {
                     <Textarea
                       placeholder="Add more details about this task..."
                       rows={3}
-                      {...field}
+                      value={field.value || ''}
+                      onChange={field.onChange}
+                      onBlur={field.onBlur}
+                      name={field.name}
+                      ref={field.ref}
                     />
                   </FormControl>
                   <FormMessage />
